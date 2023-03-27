@@ -1,7 +1,6 @@
 import React from 'react';
 import './Banner.css'
 import img from '../../Images/Formal Img.png'
-import { HiPencilAlt } from "react-icons/hi";
 import { FaPen } from "react-icons/fa";
 
 

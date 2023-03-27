@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from '../../Images/logo.png'
 
 const Login = () => {
-    return (
-        <div className='max-w-lg mx-auto'>
 
+    return (
+
+        <div className='max-w-lg mx-auto'>
             <div className=" bg-base-100">
                 <div className="hero-content flex-col ">
                     <div className=' text-center'>
