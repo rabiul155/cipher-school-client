@@ -39,10 +39,10 @@ const Navbar = () => {
                             <li>
                                 <a className="justify-between">
                                     Profile
-                                    <span className="badge">New</span>
+
                                 </a>
                             </li>
-                            <li><a>Settings</a></li>
+                            <li><Link to='/login'>LogIn</Link></li>
                             <li><a>Logout</a></li>
                         </ul>
                     </div>
@@ -50,7 +50,7 @@ const Navbar = () => {
                     <div className=' flex justify-center items-center'>
 
                         <FaRegCopyright className='text-orange-600 font-bold ml-4' size={20}></FaRegCopyright>
-                        <p className=' text-orange-600 text-xl font-bold m-2'>0</p>
+                        <p className=' text-orange-600 text-xl font-bold  pb-[1px] mx-2'>0</p>
                     </div>
                     <div className=' relative top-[3px]'>
                         <label for="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">
