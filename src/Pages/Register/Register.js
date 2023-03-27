@@ -5,11 +5,10 @@ import logo from '../../Images/logo.png'
 const Register = () => {
     return (
         <div className='max-w-lg mx-auto'>
-
-            <div className=" bg-base-200">
+            <div className=" bg-base-100">
                 <div className="hero-content flex-col ">
                     <div className=' text-center'>
-                        <div className='m-1 flex justify-center items-center'>
+                        <div className='flex justify-center items-center'>
                             <img className=' h-9 w-9' src={logo} alt="" />
                             <h3 className=' text-3xl m-3 font-bold'>
                                 CipherSchools
@@ -18,7 +17,7 @@ const Register = () => {
 
                         <div className=' text-center'>
                             <h3 className=' text-xl font-bold'>Create an account</h3>
-                            <p className="py-3">
+                            <p className="py-1">
                                 Please provide your email and password to signUp
                             </p>
                         </div>

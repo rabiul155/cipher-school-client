@@ -1,0 +1,13 @@
+.banner-bg {
+    background-image: url('../../Images/bannerImg.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.gradient-color {
+    background-image: linear-gradient(to right, white, rgba(0, 0, 0, 0), white);
+
+}
