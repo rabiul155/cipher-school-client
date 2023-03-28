@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaUserCircle, FaRegBell, FaRegCopyright, FaSearch } from "react-icons/fa";
+import { FaUserCircle, FaRegBell, FaRegCopyright } from "react-icons/fa";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import logo from '../../Images/logo.png'
+import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
+
+    const { logOut, user } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.success('Log Out successfully')
+            })
+            .catch(err => {
+                console.error('logout error', err)
+            })
+
+    }
+
     return (
         <div>
             <div className="navbar  bg-base-200">
@@ -12,7 +28,9 @@ const Navbar = () => {
                     <Link className=" normal-case font-bold text-2xl">
                         <img className=' h-9 w-9 rounded-full mx-2 inline-block' src={logo} alt="" /> <span className=''>CipherSchools</span>
                     </Link>
+                    <Link className='mx-4 text-lg font-bold' to='/'> Home</Link>
                 </div>
+
                 <div className="flex-none gap-2 relative">
                     <div className="form-control">
                         <input type="text" placeholder="Search and learn" className="input input-bordered bg-base-300 rounded-full pl-11 h-10 pb-[2px] w-96 " />
@@ -36,14 +54,24 @@ const Navbar = () => {
                             </div>
                         </label>
                         <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <Link to='/profile' >
-                                    Profile
 
-                                </Link>
-                            </li>
-                            <li><Link to='/login'>LogIn</Link></li>
-                            <li><a>Logout</a></li>
+                            {
+                                user?.email ?
+                                    <>
+                                        <li>
+                                            <Link to='/profile' >
+                                                Profile
+                                            </Link>
+                                        </li>
+                                        <li><button onClick={handleLogOut}>Logout</button></li>
+                                    </>
+                                    :
+                                    <li><Link to='/login'>LogIn</Link></li>
+                            }
+
+
+
+
                         </ul>
                     </div>
 
@@ -53,7 +81,7 @@ const Navbar = () => {
                         <p className=' text-orange-600 text-xl font-bold  pb-[1px] mx-2'>0</p>
                     </div>
                     <div className=' relative top-[3px]'>
-                        <label for="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">
+                        <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">
                             <span className="relative">
                                 <input id="Toggle1" type="checkbox" className="hidden peer" />
                                 <div className="w-[44px] h-5 rounded-full shadow-inner dark:bg-gray-400 peer-checked:bg-orange-600"></div>

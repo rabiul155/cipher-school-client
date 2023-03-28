@@ -16,7 +16,9 @@ const Profile = () => {
                     <h4 className='uppercase text-xl font-bold'> About Me</h4>
                     <button className='btn btn-sm px-5 h-[10px] border-0 bg-orange-500 hover:bg-orange-400'> Edit</button>
                 </div>
-                <textarea className="textarea m-2 mb-6 h-24 w-full" placeholder="Bio"></textarea>
+                <div className=' mr-2'>
+                    <textarea className="textarea  mb-6 h-24 w-full" placeholder="Add something about you"></textarea>
+                </div>
                 <hr />
             </div>
 
@@ -80,9 +82,8 @@ const Profile = () => {
                             <label className="label">
                                 <span className=" font-semibold">Password</span>
                             </label>
-                            <div className=' '>
-                                <input type="text" placeholder="*******************" className="input h-10 w-full " />
-
+                            <div className=' mr-4'>
+                                <input type="text" placeholder="*******************" className="input  h-10 w-full " />
                             </div>
 
                         </div>
