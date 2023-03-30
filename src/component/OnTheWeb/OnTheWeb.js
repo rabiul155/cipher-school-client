@@ -1,13 +1,69 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { FaGithub, FaLinkedinIn, FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
+import { AuthContext } from '../../context/AuthProvider';
 
-const OnTheWeb = () => {
+const OnTheWeb = ({ userData }) => {
+
+    const { linkedIn, gitHub, facebook, twitter, instagram, website } = userData;
+    const { user } = useContext(AuthContext);
+    const [btnName, setBtnName] = useState('EDIT')
+    const [isDisable, setIsDsilable] = useState(true)
+    const [linkedInURL, setLinkedIn] = useState(linkedIn)
+    const [githubURL, setGithub] = useState(gitHub)
+    const [facebookURL, setfacebook] = useState(facebook)
+    const [twitterURL, setTwitter] = useState(twitter)
+    const [instagramURL, setInstagram] = useState(instagram)
+    const [websiteURL, setWebsite] = useState(website)
+
+
+    const handleEditBtn = (event) => {
+        const name = event.target.innerText;
+
+        if (name === 'EDIT') {
+            setBtnName("SAVE")
+            setIsDsilable(false)
+
+        }
+        else {
+            setBtnName("EDIT")
+            setIsDsilable(true)
+
+            const websites = {
+                linkedIn: linkedInURL,
+                gitHub: githubURL,
+                facebook: facebookURL,
+                twitter: twitterURL,
+                instagram: instagramURL,
+                website: websiteURL
+            }
+
+
+            fetch(`http://localhost:5000/updateWebsites?email=${user?.email}`, {
+                method: "PUT",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(websites)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    toast.success('Websites updated')
+                })
+
+
+
+        }
+
+    }
+
     return (
 
         <div className='py-6 mx-10'>
             <div className='mx-2 flex justify-between'>
                 <h4 className='uppercase text-xl font-bold'>On The Web</h4>
-                <button className='btn btn-sm px-5 h-[10px] border-0 bg-orange-500 hover:bg-orange-400'> Edit</button>
+                <button onClick={handleEditBtn} className='btn btn-sm px-5 h-[10px] border-0 bg-orange-500 hover:bg-orange-400'>{btnName}</button>
             </div>
 
             <div className=' mb-6'>
@@ -18,7 +74,7 @@ const OnTheWeb = () => {
                             <span className=" font-semibold">Linkedin</span>
                         </label>
                         <div className=' relative'>
-                            <input type="text" placeholder="Linkedin" className="input px-12 h-10 w-full " />
+                            <input defaultValue={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} disabled={isDisable} type="text" placeholder="Linkedin" className=" input px-12 h-10 w-full disabled-bg" />
                             <FaLinkedinIn className=' absolute top-[10px] left-4' size={22}></FaLinkedinIn>
                         </div>
                     </div>
@@ -28,7 +84,7 @@ const OnTheWeb = () => {
                             <span className=" font-semibold">Github</span>
                         </label>
                         <div className=' relative'>
-                            <input type="text" placeholder="Github" className="input px-12 h-10 w-full " />
+                            <input defaultValue={gitHub} onChange={(e) => setGithub(e.target.value)} disabled={isDisable} type="text" placeholder="Github" className="input px-12 h-10 w-full disabled-bg" />
                             <FaGithub className=' absolute top-[10px] left-4' size={22}></FaGithub>
                         </div>
                     </div>
@@ -39,7 +95,7 @@ const OnTheWeb = () => {
                             <span className=" font-semibold">Facebook</span>
                         </label>
                         <div className=' relative'>
-                            <input type="text" placeholder="Facebook" className="input px-12 h-10 w-full " />
+                            <input defaultValue={facebook} onChange={(e) => setfacebook(e.target.value)} disabled={isDisable} type="text" placeholder="Facebook" className="input px-12 h-10 w-full disabled-bg" />
                             <FaFacebook className=' absolute top-[10px] left-4' size={22}></FaFacebook>
                         </div>
                     </div>
@@ -49,7 +105,7 @@ const OnTheWeb = () => {
                             <span className=" font-semibold">Twitter</span>
                         </label>
                         <div className=' relative'>
-                            <input type="text" placeholder="Twitter" className="input px-12 h-10 w-full " />
+                            <input defaultValue={twitter} onChange={(e) => setTwitter(e.target.value)} disabled={isDisable} type="text" placeholder="Twitter" className="input px-12 h-10 w-full disabled-bg" />
                             <FaTwitter className=' absolute top-[10px] left-4' size={22}></FaTwitter>
                         </div>
                     </div>
@@ -60,7 +116,7 @@ const OnTheWeb = () => {
                             <span className=" font-semibold">Instagram</span>
                         </label>
                         <div className=' relative'>
-                            <input type="text" placeholder="Instagram" className="input px-12 h-10 w-full " />
+                            <input defaultValue={instagram} onChange={(e) => setInstagram(e.target.value)} disabled={isDisable} type="text" placeholder="Instagram" className="input px-12 h-10 w-full disabled-bg" />
                             <FaInstagram className=' absolute top-[10px] left-4' size={22}></FaInstagram>
                         </div>
                     </div>
@@ -70,7 +126,7 @@ const OnTheWeb = () => {
                             <span className=" font-semibold">Your website</span>
                         </label>
                         <div className=' relative'>
-                            <input type="text" placeholder="Your website" className="input px-12 h-10 w-full " />
+                            <input defaultValue={website} onChange={(e) => setWebsite(e.target.value)} disabled={isDisable} type="text" placeholder="Your website" className="input px-12 h-10 w-full disabled-bg" />
                             <FaGlobe className=' absolute top-[10px] left-4' size={22}></FaGlobe>
                         </div>
                     </div>

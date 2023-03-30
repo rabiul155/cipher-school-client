@@ -3,3 +3,11 @@
     border-radius: 6px;
 
 }
+
+.disabled-bg:disabled {
+    background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+    ;
+    cursor: default;
+    color: rgb(96, 96, 96);
+
+}
