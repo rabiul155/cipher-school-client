@@ -8,25 +8,48 @@ import './Profile.css'
 
 const Profile = () => {
 
-
     const { user } = useContext(AuthContext);
+
+    const [isLoading, setIsLoading] = useState(true)
     const [userData, setUserData] = useState({})
     const [isDisable1, setIsDsilable1] = useState(true)
     const [isDisable2, setIsDsilable2] = useState(true)
-    const [about, setAbout] = useState(userData?.about)
-    const [education, setEducation] = useState(userData?.education)
-    const [institute, setInstitute] = useState(userData?.institute)
+    const [about, setAbout] = useState()
+    const [education, setEducation] = useState()
+    const [institute, setInstitute] = useState()
     const [btnName1, setbtnName1] = useState('EDIT')
     const [btnName2, setbtnName2] = useState('EDIT')
+    const [linkedIn, setLinkedIn] = useState()
+    const [gitHub, setGithub] = useState()
+    const [facebook, setfacebook] = useState()
+    const [twitter, setTwitter] = useState()
+    const [instagram, setInstagram] = useState()
+    const [website, setWebsite] = useState()
+
+    console.log(education, institute);
 
     useEffect(() => {
+        setIsLoading(true)
         fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setUserData(data)
+                setAbout(data.about)
+                setEducation(data.education)
+                setInstitute(data.institute)
+                setLinkedIn(data.linkedIn)
+                setGithub(data.gitHub)
+                setfacebook(data.facebook)
+                setInstagram(data.instagram)
+                setTwitter(data.twitter)
+                setWebsite(data.website)
             })
 
+        setIsLoading(false)
+
     }, [user])
+
 
 
 
@@ -34,6 +57,7 @@ const Profile = () => {
         const name = event.target.innerText;
 
         if (name === 'EDIT') {
+            console.log(about);
             setbtnName1("SAVE")
             setIsDsilable1(false)
         }
@@ -43,6 +67,7 @@ const Profile = () => {
             const userAbout = {
                 about: about
             }
+            console.log(userAbout);
 
             fetch(`http://localhost:5000/userAbout?email=${user?.email}`, {
                 method: "PUT",
@@ -65,6 +90,7 @@ const Profile = () => {
         const name = event.target.innerText;
 
         if (name === 'EDIT') {
+
             setbtnName2("SAVE")
             setIsDsilable2(false)
         }
@@ -87,7 +113,7 @@ const Profile = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    toast.success('Education Details')
+                    toast.success('Education Details Update')
                 })
 
 
@@ -95,6 +121,9 @@ const Profile = () => {
     }
 
 
+    if (isLoading) {
+        return <div>Loading.....</div>
+    }
 
 
     return (
@@ -102,7 +131,7 @@ const Profile = () => {
 
         <div className=' bg-base-200'>
 
-            <Banner></Banner>
+            <Banner userData={userData}></Banner>
 
             {/* about me section  */}
 
@@ -112,7 +141,7 @@ const Profile = () => {
                     <button onClick={handleEditBtn1} className='btn btn-sm px-5 h-[10px] border-0 bg-orange-500 hover:bg-orange-400'>{btnName1}</button>
                 </div>
                 <div className=' mr-2'>
-                    <textarea defaultValue={userData.about} onChange={(e) => setAbout(e.target.value)} name='about' disabled={isDisable1} className="textarea bg-base-100 disabled-bg mb-6 h-24 w-full" placeholder="Add something about you"></textarea>
+                    <textarea defaultValue={userData.about} onBlur={(e) => setAbout(e.target.value)} name='about' disabled={isDisable1} className="textarea bg-base-100 disabled-bg mb-6 h-24 w-full" placeholder="Add something about you"></textarea>
                 </div>
                 <hr />
             </div>
@@ -121,7 +150,20 @@ const Profile = () => {
 
             {/* on the web section */}
 
-            <OnTheWeb userData={userData}></OnTheWeb>
+            <OnTheWeb
+                linkedIn={linkedIn}
+                gitHub={gitHub}
+                facebook={facebook}
+                twitter={twitter}
+                instagram={instagram}
+                website={website}
+                setLinkedIn={setLinkedIn}
+                setGithub={setGithub}
+                setfacebook={setfacebook}
+                setTwitter={setTwitter}
+                setInstagram={setInstagram}
+                setWebsite={setWebsite}
+            ></OnTheWeb>
 
             {/* professional info    */}
 
@@ -137,15 +179,17 @@ const Profile = () => {
                         </label>
                         <div className=' '>
                             <select disabled={isDisable2} onChange={(e) => setEducation(e.target.value)} className="select disabled-bg w-full h-5 select-field">
-                                <option selected={institute === 'Primary' ? true : false}>Primary</option>
-                                <option selected={institute === 'Secondary' ? true : false}>Secondary</option>
-                                <option selected={institute === 'Higher Secondary' ? true : false}>Higher Secondary</option>
-                                <option selected={institute === 'Graduate' ? true : false}>Graduate</option>
-                                <option selected={institute === 'Post Graduate' ? true : false}>Post Graduate</option>
+                                <option selected={education === 'Primary' ? true : false}>Primary</option>
+                                <option selected={education === 'Secondary' ? true : false}>Secondary</option>
+                                <option selected={education === 'Higher Secondary' ? true : false}>Higher Secondary</option>
+                                <option selected={education === 'Graduate' ? true : false}>Graduate</option>
+                                <option selected={education === 'Post Graduate' ? true : false}>Post Graduate</option>
 
                             </select>
                         </div>
                     </div>
+
+
 
                     <div className="form-control w-full mx-2 ">
                         <label className="label">
@@ -153,11 +197,11 @@ const Profile = () => {
                         </label>
                         <div className=' '>
                             <select disabled={isDisable2} onChange={(e) => setInstitute(e.target.value)} className="select disabled-bg w-full py-2 h-3 select-field" >
-                                <option>Schooling</option>
-                                <option>College Student</option>
-                                <option>Teaching</option>
-                                <option>Job</option>
-                                <option>Freelancing</option>
+                                <option selected={institute === "Schooling" ? true : false}>Schooling</option>
+                                <option selected={institute === "College Student" ? true : false}>College Student</option>
+                                <option selected={institute === "Teaching" ? true : false}>Teaching</option>
+                                <option selected={institute === "Job" ? true : false}>Job</option>
+                                <option selected={institute === "Freelancing" ? true : false}>Freelancing</option>
                             </select>
                         </div>
                     </div>

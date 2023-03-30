@@ -3,18 +3,15 @@ import { toast } from 'react-hot-toast';
 import { FaGithub, FaLinkedinIn, FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
 import { AuthContext } from '../../context/AuthProvider';
 
-const OnTheWeb = ({ userData }) => {
+const OnTheWeb = ({ linkedIn, gitHub, facebook, twitter, instagram, website,
+    setLinkedIn, setGithub, setfacebook, setInstagram, setTwitter, setWebsite }) => {
 
-    const { linkedIn, gitHub, facebook, twitter, instagram, website } = userData;
+
     const { user } = useContext(AuthContext);
     const [btnName, setBtnName] = useState('EDIT')
     const [isDisable, setIsDsilable] = useState(true)
-    const [linkedInURL, setLinkedIn] = useState(linkedIn)
-    const [githubURL, setGithub] = useState(gitHub)
-    const [facebookURL, setfacebook] = useState(facebook)
-    const [twitterURL, setTwitter] = useState(twitter)
-    const [instagramURL, setInstagram] = useState(instagram)
-    const [websiteURL, setWebsite] = useState(website)
+
+
 
 
     const handleEditBtn = (event) => {
@@ -30,12 +27,12 @@ const OnTheWeb = ({ userData }) => {
             setIsDsilable(true)
 
             const websites = {
-                linkedIn: linkedInURL,
-                gitHub: githubURL,
-                facebook: facebookURL,
-                twitter: twitterURL,
-                instagram: instagramURL,
-                website: websiteURL
+                linkedIn: linkedIn,
+                gitHub: gitHub,
+                facebook: facebook,
+                twitter: twitter,
+                instagram: instagram,
+                website: website
             }
 
 
@@ -74,7 +71,7 @@ const OnTheWeb = ({ userData }) => {
                             <span className=" font-semibold">Linkedin</span>
                         </label>
                         <div className=' relative'>
-                            <input defaultValue={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} disabled={isDisable} type="text" placeholder="Linkedin" className=" input px-12 h-10 w-full disabled-bg" />
+                            <input defaultValue={linkedIn} onBlur={(e) => setLinkedIn(e.target.value)} disabled={isDisable} type="text" placeholder="Linkedin" className=" input px-12 h-10 w-full disabled-bg" />
                             <FaLinkedinIn className=' absolute top-[10px] left-4' size={22}></FaLinkedinIn>
                         </div>
                     </div>
@@ -84,7 +81,7 @@ const OnTheWeb = ({ userData }) => {
                             <span className=" font-semibold">Github</span>
                         </label>
                         <div className=' relative'>
-                            <input defaultValue={gitHub} onChange={(e) => setGithub(e.target.value)} disabled={isDisable} type="text" placeholder="Github" className="input px-12 h-10 w-full disabled-bg" />
+                            <input defaultValue={gitHub} onBlur={(e) => setGithub(e.target.value)} disabled={isDisable} type="text" placeholder="Github" className="input px-12 h-10 w-full disabled-bg" />
                             <FaGithub className=' absolute top-[10px] left-4' size={22}></FaGithub>
                         </div>
                     </div>
@@ -95,7 +92,7 @@ const OnTheWeb = ({ userData }) => {
                             <span className=" font-semibold">Facebook</span>
                         </label>
                         <div className=' relative'>
-                            <input defaultValue={facebook} onChange={(e) => setfacebook(e.target.value)} disabled={isDisable} type="text" placeholder="Facebook" className="input px-12 h-10 w-full disabled-bg" />
+                            <input defaultValue={facebook} onBlur={(e) => setfacebook(e.target.value)} disabled={isDisable} type="text" placeholder="Facebook" className="input px-12 h-10 w-full disabled-bg" />
                             <FaFacebook className=' absolute top-[10px] left-4' size={22}></FaFacebook>
                         </div>
                     </div>
@@ -105,7 +102,7 @@ const OnTheWeb = ({ userData }) => {
                             <span className=" font-semibold">Twitter</span>
                         </label>
                         <div className=' relative'>
-                            <input defaultValue={twitter} onChange={(e) => setTwitter(e.target.value)} disabled={isDisable} type="text" placeholder="Twitter" className="input px-12 h-10 w-full disabled-bg" />
+                            <input defaultValue={twitter} onBlur={(e) => setTwitter(e.target.value)} disabled={isDisable} type="text" placeholder="Twitter" className="input px-12 h-10 w-full disabled-bg" />
                             <FaTwitter className=' absolute top-[10px] left-4' size={22}></FaTwitter>
                         </div>
                     </div>
@@ -116,7 +113,7 @@ const OnTheWeb = ({ userData }) => {
                             <span className=" font-semibold">Instagram</span>
                         </label>
                         <div className=' relative'>
-                            <input defaultValue={instagram} onChange={(e) => setInstagram(e.target.value)} disabled={isDisable} type="text" placeholder="Instagram" className="input px-12 h-10 w-full disabled-bg" />
+                            <input defaultValue={instagram} onBlur={(e) => setInstagram(e.target.value)} disabled={isDisable} type="text" placeholder="Instagram" className="input px-12 h-10 w-full disabled-bg" />
                             <FaInstagram className=' absolute top-[10px] left-4' size={22}></FaInstagram>
                         </div>
                     </div>
@@ -126,7 +123,7 @@ const OnTheWeb = ({ userData }) => {
                             <span className=" font-semibold">Your website</span>
                         </label>
                         <div className=' relative'>
-                            <input defaultValue={website} onChange={(e) => setWebsite(e.target.value)} disabled={isDisable} type="text" placeholder="Your website" className="input px-12 h-10 w-full disabled-bg" />
+                            <input defaultValue={website} onBlur={(e) => setWebsite(e.target.value)} disabled={isDisable} type="text" placeholder="Your website" className="input px-12 h-10 w-full disabled-bg" />
                             <FaGlobe className=' absolute top-[10px] left-4' size={22}></FaGlobe>
                         </div>
                     </div>
