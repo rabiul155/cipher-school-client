@@ -30,7 +30,7 @@ const Profile = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
+        fetch(`https://cipher-school-server.vercel.app/user?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -69,7 +69,7 @@ const Profile = () => {
             }
             console.log(userAbout);
 
-            fetch(`http://localhost:5000/userAbout?email=${user?.email}`, {
+            fetch(`https://cipher-school-server.vercel.app/userAbout?email=${user?.email}`, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
@@ -103,7 +103,7 @@ const Profile = () => {
             }
 
 
-            fetch(`http://localhost:5000/userDetails?email=${user?.email}`, {
+            fetch(`https://cipher-school-server.vercel.app/userDetails?email=${user?.email}`, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'

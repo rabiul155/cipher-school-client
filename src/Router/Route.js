@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/users'),
+                loader: () => fetch('https://cipher-school-server.vercel.app/users'),
                 element: <Home></Home>
             },
 

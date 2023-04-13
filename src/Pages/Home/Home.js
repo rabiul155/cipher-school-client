@@ -10,7 +10,7 @@ const Home = () => {
     // const [users, setUsers] = useState([])
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/users')
+    //     fetch('https://cipher-school-server.vercel.app/users')
     //         .then(res => res.json())
     //         .then(data => {
     //             setUsers(data);

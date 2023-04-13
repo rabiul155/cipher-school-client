@@ -18,7 +18,7 @@ const Banner = ({ userData }) => {
     const handleFormSubmit = (data) => {
         console.log(data);
         const photo = data.photo[0];
-        console.log(photo);
+
         const formData = new FormData()
         formData.append('image', photo);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
@@ -36,7 +36,7 @@ const Banner = ({ userData }) => {
                         phone: data.phone
                     }
 
-                    fetch(`http://localhost:5000/updateProfile?email=${user.email}`, {
+                    fetch(`https://cipher-school-server.vercel.app/updateProfile?email=${user.email}`, {
                         method: "PUT",
                         headers: {
                             'content-type': 'application/json'

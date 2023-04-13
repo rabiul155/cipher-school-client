@@ -83,7 +83,7 @@ const Register = () => {
             follower,
             institute: 'collge student'
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://cipher-school-server.vercel.app/users', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

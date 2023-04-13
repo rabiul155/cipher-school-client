@@ -36,7 +36,7 @@ const OnTheWeb = ({ linkedIn, gitHub, facebook, twitter, instagram, website,
             }
 
 
-            fetch(`http://localhost:5000/updateWebsites?email=${user?.email}`, {
+            fetch(`https://cipher-school-server.vercel.app/updateWebsites?email=${user?.email}`, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
